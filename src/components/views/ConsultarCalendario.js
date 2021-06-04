@@ -81,7 +81,7 @@ function ConsultarClasesCliente() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             var salaActualLocal = ''
             for(var i = 0; i < respuesta.data.length; i++){

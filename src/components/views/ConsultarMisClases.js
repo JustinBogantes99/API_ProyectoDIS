@@ -55,7 +55,7 @@ function ConsultarMisClases() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             var salaActualLocal = ''
             for(var i = 0; i < respuesta.data.length; i++){
@@ -77,7 +77,7 @@ function ConsultarMisClases() {
                 else setError('No hay ninguna clase en la fecha actual')
 
 
-                axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                 .then(usuarios => {
                     if(usuarios.data.length > 0){
                         const usuariosSala = []

@@ -59,13 +59,13 @@ function ConsultarEstado() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 setListaSalas(respuesta.data)
                 setSalaActual(respuesta.data[0])
 
-                axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                 .then(respuestaListaUsuarios => {
                     if(respuestaListaUsuarios.data.length > 0){
                         respuestaListaUsuarios.data.sort(function(a,b){

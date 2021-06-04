@@ -25,7 +25,7 @@ function MiPerfil() {
             nombreUsuario: userData.username
         }
 
-        axios.post('http://localhost:5000/Usuario/encontrarNombreUsuario', usuario)
+        axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarNombreUsuario', usuario)
         .then(respuesta => {
             console.log(respuesta)
             if(respuesta.data.length > 0){

@@ -42,7 +42,7 @@ function EditarUsuario() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 setListaSalas(respuesta.data)
@@ -56,7 +56,7 @@ function EditarUsuario() {
 
                 setListaServiciosEntera(respuesta.data[0].servicios)
 
-                axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                 .then(respuestaListaUsuarios => {
 
                     respuestaListaUsuarios.data.sort(function(a,b){
@@ -516,7 +516,7 @@ function EditarUsuario() {
                 }
             }
 
-            axios.post('http://localhost:5000/Usuario/editarUsuario', editandoUsuario)
+            axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)
             .then(() => {
                 alert('Usuario editado!')
                 window.location.replace('/menuUsuarios')

@@ -26,7 +26,7 @@ function Ingresar() {
                 nombreUsuario: username
             }
 
-            axios.post('http://localhost:5000/Usuario/encontrarNombreUsuario', nombreUsuarioLocal)
+            axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarNombreUsuario', nombreUsuarioLocal)
             .then(respuestaNombreUsuario =>{
                 if(respuestaNombreUsuario.data.length === 0){
                     setError('El usuario ingresado no existe')
@@ -35,7 +35,7 @@ function Ingresar() {
                         contraseniaInsertada: password,
                         contraseniaReal: respuestaNombreUsuario.data[0].cuenta.contrasenia
                     }
-                    axios.post('http://localhost:5000/Seguridad/checking/', posibleUsuario)
+                    axios.post('https://api-dis2021.herokuapp.com/Seguridad/checking/', posibleUsuario)
                     .then(answer => {
                         console.log(posibleUsuario)
                         if(answer.data){

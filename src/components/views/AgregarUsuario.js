@@ -35,7 +35,7 @@ function AgregarUsuario() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 setListaSalas(respuesta.data)
@@ -144,14 +144,14 @@ function AgregarUsuario() {
                 cedula:cedula
             }
 
-            axios.post('http://localhost:5000/Usuario/encontrarCedula', cedulaLocal)
+            axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarCedula', cedulaLocal)
             .then(respuestaCedula => {
                 if(respuestaCedula.data.length === 0){
                     const nombreUsuarioLocal = {
                         nombreUsuario:nombreUsuario
                     }
 
-                    axios.post('http://localhost:5000/Usuario/encontrarNombreUsuario', nombreUsuarioLocal)
+                    axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarNombreUsuario', nombreUsuarioLocal)
                     .then(respuestaNombreUsuario => {
                         if(respuestaNombreUsuario.data.length === 0){
 
@@ -159,7 +159,7 @@ function AgregarUsuario() {
                                 contrasenia:contrasenia
                             }
 
-                            axios.post('http://localhost:5000/Seguridad/salting', contraseniaLocal)
+                            axios.post('https://api-dis2021.herokuapp.com/Seguridad/salting', contraseniaLocal)
                             .then(contraseniaSalteada => {
                                 
                                 var nuevoUsuario;
@@ -199,7 +199,7 @@ function AgregarUsuario() {
                                     }
                                 }
 
-                                axios.post('http://localhost:5000/Usuario/agregarUsuario', nuevoUsuario)
+                                axios.post('https://api-dis2021.herokuapp.com/Usuario/agregarUsuario', nuevoUsuario)
                                 .then(() => {
                                     alert('¡Usuario Agregado!')
                                     window.location.replace('/menuUsuarios')

@@ -28,7 +28,7 @@ function ReservarCupoCliente() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             var salaActualLocal = ''
             for(var i = 0; i < respuesta.data.length; i++){
@@ -53,7 +53,7 @@ function ReservarCupoCliente() {
                     nombreUsuario:userData.username
                 }
 
-                axios.post('http://localhost:5000/Usuario/encontrarNombreUsuario', nombreUsuario)
+                axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarNombreUsuario', nombreUsuario)
                 .then(usuarios => {
                     if(usuarios.data.length > 0){
                         setClientActual(usuarios.data[0])
@@ -130,14 +130,14 @@ function ReservarCupoCliente() {
                     editandoClase: clase
                 }
 
-                axios.post('http://localhost:5000/Sala/editarClase', editandoClase)
+                axios.post('https://api-dis2021.herokuapp.com/Sala/editarClase', editandoClase)
                 .then(() => {
                     
                     const nombreSala ={
                         nombre: salaActual.nombre
                     }
 
-                    axios.post('http://localhost:5000/Sala/encontrarSala', nombreSala)
+                    axios.post('https://api-dis2021.herokuapp.com/Sala/encontrarSala', nombreSala)
                     .then(salas =>{
                         var nclaseActual = ''
                         for(var i = 0; i < salas.data[0].clases.length; i++){
@@ -161,7 +161,7 @@ function ReservarCupoCliente() {
                                 herencia: nuevaHerencia
                             }
 
-                            axios.post('http://localhost:5000/Usuario/editarUsuario', editandoUsuario)
+                            axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)
                             .then(() => {
                                 alert('Reserva Realizada!')
                                 window.location.replace('/menuPrincipal')

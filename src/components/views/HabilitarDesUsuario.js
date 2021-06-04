@@ -28,14 +28,14 @@ function HabilitarDesUsuario() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 console.log(respuesta.data)
                 setListaSalas(respuesta.data)
                 setSalaActual(respuesta.data[0])
 
-                axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                 .then(respuestaUsuarios => {
                     if(respuestaUsuarios.data.length > 0){
                         setListaUsuarios(respuestaUsuarios.data)
@@ -95,7 +95,7 @@ function HabilitarDesUsuario() {
                 estado: !usuarioActual.estado,
                 herencia: usuarioActual.herencia
             }
-            axios.post('http://localhost:5000/Usuario/editarUsuario', editandoUsuario)
+            axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)
             .then(() => {
                 alert('¡Usuario '+(!usuarioActual.estado?('Activado!'):('Desactivado!')))
                 window.location.replace('/menuUsuarios')

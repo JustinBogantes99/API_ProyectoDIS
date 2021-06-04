@@ -35,7 +35,7 @@ function CambiarContrasenia() {
                 nombreUsuario: userData.username
             }
 
-            axios.post('http://localhost:5000/Usuario/encontrarNombreUsuario', usuario)
+            axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarNombreUsuario', usuario)
             .then(usuario => {
                 if(usuario.data.length > 0){
                     const comprobarContrasenia = {
@@ -44,10 +44,10 @@ function CambiarContrasenia() {
                         contraseniaReal: usuario.data[0].cuenta.contrasenia
                     }
 
-                    axios.post('http://localhost:5000/Seguridad/checking', comprobarContrasenia)
+                    axios.post('https://api-dis2021.herokuapp.com/Seguridad/checking', comprobarContrasenia)
                     .then(respuestaContrasenia => {
                         if(respuestaContrasenia){
-                            axios.post('http://localhost:5000/Seguridad/salting', comprobarContrasenia)
+                            axios.post('https://api-dis2021.herokuapp.com/Seguridad/salting', comprobarContrasenia)
                             .then(respuestaContraseniaSalteada => {
                                 const editandoUsuario = {
                                     cedula: usuario.data[0].cedula,
@@ -60,7 +60,7 @@ function CambiarContrasenia() {
                                     estado: usuario.data[0].estado,
                                     herencia: usuario.data[0].herencia,
                                 }
-                                axios.post('http://localhost:5000/Usuario/editarUsuario', editandoUsuario)
+                                axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)
                                 .then(() => {
                                     alert('¡Contraseña editada!')
                                     window.location.replace('/miPerfil')

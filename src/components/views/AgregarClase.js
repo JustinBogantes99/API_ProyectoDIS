@@ -41,7 +41,7 @@ function AgregarClase() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 setListaSalas(respuesta.data)
@@ -69,7 +69,7 @@ function AgregarClase() {
                         setCupos(respuesta.data[0].servicios[0].maximoPersonas)
                     }
 
-                    axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                    axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                     .then(respuestaListaUsuarios => {
                         if(respuestaListaUsuarios.data.length > 0){
                             respuestaListaUsuarios.data.sort(function(a,b){
@@ -351,7 +351,7 @@ function AgregarClase() {
                             nuevasClases: listaNuevasClases
                         }
 
-                        axios.post('http://localhost:5000/Sala/agregarClases', nuevasClasesFinal)
+                        axios.post('https://api-dis2021.herokuapp.com/Sala/agregarClases', nuevasClasesFinal)
                         .then(() => {
                             alert('¡Clases Agregadas!')
                             window.location.replace('/menuClases')

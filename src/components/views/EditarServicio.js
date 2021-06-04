@@ -30,7 +30,7 @@ function EditarServicio() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 console.log(respuesta.data)
@@ -103,10 +103,10 @@ function EditarServicio() {
                 }
             }
 
-            axios.post('http://localhost:5000/Sala/encontrarServicio', editandoServicio)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/encontrarServicio', editandoServicio)
             .then(respuestaServicio => {
                 if(respuestaServicio.data[0].servicios.length === 0 || servicioActual.nombre === servicio){
-                    axios.post('http://localhost:5000/Sala/editarServicio', editandoServicio)
+                    axios.post('https://api-dis2021.herokuapp.com/Sala/editarServicio', editandoServicio)
                     .then(() => {
                         alert('¡Servicio editado!')
                         window.location.replace('/menuServicios')

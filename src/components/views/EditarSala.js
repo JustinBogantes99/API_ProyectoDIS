@@ -33,7 +33,7 @@ function EditarSala() {
         }
 
         //Se tienen que cargar los datos de las salas
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
 
@@ -142,10 +142,10 @@ function EditarSala() {
                 horario: horarioSemanal
             }
 
-            axios.post('http://localhost:5000/Sala/encontrarSala', editandoSala)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/encontrarSala', editandoSala)
             .then(respuesta => {
                 if(respuesta.data.length === 0 || nombreSala === salaActual.nombre){
-                    axios.post('http://localhost:5000/Sala/editarSala', editandoSala)
+                    axios.post('https://api-dis2021.herokuapp.com/Sala/editarSala', editandoSala)
                     .then(() => {
                         alert('¡Sala Editada!')
                         window.location.replace('/menuSalas')

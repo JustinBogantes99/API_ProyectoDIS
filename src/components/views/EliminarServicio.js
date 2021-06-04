@@ -28,7 +28,7 @@ function EliminarServicio() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 console.log(respuesta.data)
@@ -76,7 +76,7 @@ function EliminarServicio() {
                 nombre: servicioActual.nombre
             }
 
-            axios.post('http://localhost:5000/Sala/eliminarServicio', eliminandoServicio)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/eliminarServicio', eliminandoServicio)
             .then(() => {
                 alert('¡Servicio eliminado!')
                 window.location.replace('/menuServicios')

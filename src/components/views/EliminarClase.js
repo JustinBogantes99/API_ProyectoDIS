@@ -28,7 +28,7 @@ function EliminarClase() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 respuesta.data[0].servicios.sort(function(a,b){
@@ -106,7 +106,7 @@ function EliminarClase() {
                 nombreSala: salaActual.nombre,
                 _id: claseActual._id
             }
-            axios.post('http://localhost:5000/Sala/eliminarClase', eliminandoClase)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/eliminarClase', eliminandoClase)
             .then(() => {
                 alert('Clase eliminada!')
                 window.location.replace('/menuClases')

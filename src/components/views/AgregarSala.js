@@ -102,10 +102,10 @@ function AgregarSala() {
                 horario: horarioSemanal
             }
 
-            axios.post('http://localhost:5000/Sala/encontrarSala', nuevaSala)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/encontrarSala', nuevaSala)
             .then(answer => {
                 if(answer.data.length === 0){
-                    axios.post('http://localhost:5000/Sala/agregarSala', nuevaSala)
+                    axios.post('https://api-dis2021.herokuapp.com/Sala/agregarSala', nuevaSala)
                     .then(() => {
                         alert('¡Sala Agregada!')
                         window.location.replace('/menuSalas')

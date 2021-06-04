@@ -43,7 +43,7 @@ function EditarClase() {
             window.location.replace('/menuPrincipal')
         }
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 respuesta.data[0].servicios.sort(function(a,b){
@@ -57,7 +57,7 @@ function EditarClase() {
                 setListaServicios(respuesta.data[0].servicios)
 
                 if(respuesta.data[0].servicios.length > 0)setListaServicios(respuesta.data[0].servicios)
-                axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                 .then(respuestaListaUsuarios => {
                     if(respuestaListaUsuarios.data.length > 0){
                         respuestaListaUsuarios.data.sort(function(a,b){
@@ -347,7 +347,7 @@ function EditarClase() {
                             editandoClase: listaNuevasClases[0]
                         }
                         console.log(editandoClase)
-                        axios.post('http://localhost:5000/Sala/editarClase', editandoClase)
+                        axios.post('https://api-dis2021.herokuapp.com/Sala/editarClase', editandoClase)
                         .then(() => {
                             alert('¡Clase Editada!')
                             window.location.replace('/menuClases')

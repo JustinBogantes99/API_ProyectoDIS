@@ -26,7 +26,7 @@ function EditarAforo() {
         }
 
         //Se tienen que cargar los datos de las salas
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(answer => {
             if(answer.data.length > 0){
 
@@ -64,7 +64,7 @@ function EditarAforo() {
                 horario: salaActual.horario
             }
 
-            axios.post('http://localhost:5000/Sala/editarSala', editandoSala)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/editarSala', editandoSala)
             .then(() => {
                 alert('Aforo de Sala Editada!')
                 window.location.replace('/menuSalas')

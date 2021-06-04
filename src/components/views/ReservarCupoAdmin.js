@@ -34,7 +34,7 @@ function ReservarCupoAdmin() {
 
         dia[0].setHours(0,0,0,0)
 
-        axios.get('http://localhost:5000/Sala/listaSalas')
+        axios.get('https://api-dis2021.herokuapp.com/Sala/listaSalas')
         .then(respuesta => {
             if(respuesta.data.length > 0){
                 respuesta.data[0].servicios.sort(function(a,b){
@@ -46,7 +46,7 @@ function ReservarCupoAdmin() {
                 setListaSalas(respuesta.data)
                 setSalaActual(respuesta.data[0])
 
-                axios.get('http://localhost:5000/Usuario/listaUsuarios')
+                axios.get('https://api-dis2021.herokuapp.com/Usuario/listaUsuarios')
                 .then(respuestaListaUsuarios => {
                     if(respuestaListaUsuarios.data.length > 0){
                         respuestaListaUsuarios.data.sort(function(a,b){
@@ -211,14 +211,14 @@ function ReservarCupoAdmin() {
                     editandoClase: clase
                 }
 
-                axios.post('http://localhost:5000/Sala/editarClase', editandoClase)
+                axios.post('https://api-dis2021.herokuapp.com/Sala/editarClase', editandoClase)
                 .then(() => {
                     
                     const nombreSala ={
                         nombre: salaActual.nombre
                     }
 
-                    axios.post('http://localhost:5000/Sala/encontrarSala', nombreSala)
+                    axios.post('https://api-dis2021.herokuapp.com/Sala/encontrarSala', nombreSala)
                     .then(salas =>{
                         var nclaseActual = ''
                         for(var i = 0; i < salas.data[0].clases.length; i++){
@@ -242,7 +242,7 @@ function ReservarCupoAdmin() {
                                 herencia: nuevaHerencia
                             }
 
-                            axios.post('http://localhost:5000/Usuario/editarUsuario', editandoUsuario)
+                            axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)
                             .then(() => {
                                 alert('Reserva Realizada!')
                                 window.location.replace('/menuUsuarios')
@@ -270,14 +270,14 @@ function ReservarCupoAdmin() {
                 herencia: nuevaHerencia
             }
 
-            axios.post('http://localhost:5000/Usuario/editarUsuario', editandoUsuario)
+            axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)
             .then(() => {
 
                 const nombreUsuarioLocal = {
                     nombreUsuario: clienteActual.cuenta.nombreUsuario
                 }
 
-                axios.post('http://localhost:5000/Usuario/encontrarNombreUsuario', nombreUsuarioLocal)
+                axios.post('https://api-dis2021.herokuapp.com/Usuario/encontrarNombreUsuario', nombreUsuarioLocal)
                 .then(respuestaNombreUsuario =>{
                     console.log()
                     var clase = claseActual
@@ -289,7 +289,7 @@ function ReservarCupoAdmin() {
                         editandoClase: clase
                     }
 
-                    axios.post('http://localhost:5000/Sala/editarClase', editandoClase)
+                    axios.post('https://api-dis2021.herokuapp.com/Sala/editarClase', editandoClase)
                     .then(() => {
                         alert('Reserva Realizada!')
                         window.location.replace('/menuUsuarios')
