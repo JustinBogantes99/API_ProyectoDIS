@@ -71,7 +71,7 @@ function EditarUsuario() {
                         const listaParcialUsuarios = []
                         for(var i = 0; i < respuestaListaUsuarios.data.length; i++){
                             if(respuestaListaUsuarios.data[i].sala.idSala === respuesta.data[0]._id || respuesta.data[0].rol === 'Administrador'){
-                                listaParcialUsuarios.push(respuestaListaUsuarios.data[i])
+                                if(respuestaListaUsuarios.data[i].estado)listaParcialUsuarios.push(respuestaListaUsuarios.data[i])
                             }
                         }
 
@@ -158,7 +158,7 @@ function EditarUsuario() {
 
                 const listaUsuariosParcialLocal = []
                 for(var k = 0; k < listaUsuariosEntera.length; k++){
-                    if(listaUsuariosEntera[k].sala.idSala === listaSalas[i]._id)listaUsuariosParcialLocal.push(listaUsuariosEntera[k])
+                    if(listaUsuariosEntera[k].sala.idSala === listaSalas[i]._id && listaUsuariosEntera[k].estado)listaUsuariosParcialLocal.push(listaUsuariosEntera[k])
                 }
                 
                 setListaUsuarios(listaUsuariosParcialLocal)

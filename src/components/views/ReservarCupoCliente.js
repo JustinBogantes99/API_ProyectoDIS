@@ -65,22 +65,33 @@ function ReservarCupoCliente() {
 
     const handleCambioDia = dia =>{
         setDia(dia)
-        if(salaActual.clases.length > 0){
-            const listaClasesParcialLocal = []
 
-            for(var i = 0; i < salaActual.clases.length; i++){
-                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === dia[0].getTime())listaClasesParcialLocal.push(salaActual.clases[i])
-            }
+        var today = new Date()
+        var nextMonth = new Date().setDate(today.getDate()+30)
+        var nextMonthDay = new Date(nextMonth)
 
-            setListaClasesParcial(listaClasesParcialLocal)
-            if(listaClasesParcialLocal.length > 0){
-                setError('')
-                setClaseActual(listaClasesParcialLocal[0])
+        if(nextMonthDay.getTime() >= dia[0].getTime()){
+            if(salaActual.clases.length > 0){
+                const listaClasesParcialLocal = []
+    
+                for(var i = 0; i < salaActual.clases.length; i++){
+                    if(new Date(salaActual.clases[i].diaEjecucion).getTime() === dia[0].getTime())listaClasesParcialLocal.push(salaActual.clases[i])
+                }
+    
+                setListaClasesParcial(listaClasesParcialLocal)
+                if(listaClasesParcialLocal.length > 0){
+                    setError('')
+                    setClaseActual(listaClasesParcialLocal[0])
+                }
+                else {
+                    setError('No hay ninguna clase dia seleccionado')
+                    setClaseActual({nombre:'', instructor:{nombreCompleto:''}, precio:0, horaInicio:'00:00', horaFin:'00:00', capacidadMaxima:0,pagos:[]})
+                }
             }
-            else {
-                setError('No hay ninguna clase dia seleccionado')
-                setClaseActual({nombre:'', instructor:{nombreCompleto:''}, precio:0, horaInicio:'00:00', horaFin:'00:00', capacidadMaxima:0,pagos:[]})
-            }
+        }else{
+            setError('Aún no se han revelado las clases de la fecha seleccionada. Las clases se liberan 30 días antes de la fecha seleccionada.')
+            setListaClasesParcial([])
+            setClaseActual({nombre:'', instructor:{nombreCompleto:''}, precio:0, horaInicio:'00:00', horaFin:'00:00', capacidadMaxima:0,pagos:[]})
         }
     }
 

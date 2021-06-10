@@ -134,9 +134,14 @@ function ConsultarClasesCliente() {
                 fechasAsignadas.push(minDate)
             }
 
+            var today = new Date()
+            var nextMonth = new Date().setDate(today.getDate()+30)
+            var nextMonthDay = new Date(nextMonth)
+
             for(var i = 0; i < salaActual.clases.length; i++){
-                if(new Date(salaActual.clases[i].diaEjecucion).getTime() <= fechasAsignadas[1].getTime() &&
-                    new Date(salaActual.clases[i].diaEjecucion).getTime() >= fechasAsignadas[0].getTime())listaClasesParcialLocal.push(salaActual.clases[i])
+                if((new Date(salaActual.clases[i].diaEjecucion).getTime() <= fechasAsignadas[1].getTime() &&
+                    new Date(salaActual.clases[i].diaEjecucion).getTime() >= fechasAsignadas[0].getTime()) && 
+                    new Date(salaActual.clases[i].diaEjecucion).getTime() <= nextMonthDay.getTime())listaClasesParcialLocal.push(salaActual.clases[i])
             }
 
             setListaClasesParcial(listaClasesParcialLocal)

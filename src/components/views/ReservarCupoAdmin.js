@@ -65,7 +65,7 @@ function ReservarCupoAdmin() {
 
                         const usuariosClientesParcial = []
                         for(var i = 0; i < usuariosClientes.length; i++){
-                            if(usuariosClientes[i].sala.idSala === respuesta.data[0]._id)usuariosClientesParcial.push(usuariosClientes[i])
+                            if(usuariosClientes[i].sala.idSala === respuesta.data[0]._id && usuariosClientes[i].estado)usuariosClientesParcial.push(usuariosClientes[i])
                         }
 
                         setListaClientesParcial(usuariosClientesParcial)
@@ -95,7 +95,7 @@ function ReservarCupoAdmin() {
                 
                 const listaClientesParcialLocal = []
                 for(var k = 0; k < listaClientes.length; k++){
-                    if(listaClientes[k].sala.idSala === listaSalas[i]._id)listaClientesParcialLocal.push(listaClientes[k])
+                    if(listaClientes[k].sala.idSala === listaSalas[i]._id && listaClientes[k].estado)listaClientesParcialLocal.push(listaClientes[k])
                 }
                 
                 listaClientesParcialLocal.sort(function(a,b){
@@ -149,23 +149,36 @@ function ReservarCupoAdmin() {
     const handleCambioDia = e => {
         setDia(e)
 
-        const listaClasesParcialesLocal = []
-        for(var i = 0; i < salaActual.clases.length; i++){
-            if(new Date(salaActual.clases[i].diaEjecucion).getTime() === e[0].getTime()) listaClasesParcialesLocal.push(salaActual.clases[i])
-        }
+        var today = new Date()
+        var nextMonth = new Date().setDate(today.getDate()+30)
+        var nextMonthDay = new Date(nextMonth)
 
-        listaClasesParcialesLocal.sort(function(a,b){
-            if(a.nombre < b.nombre) { return -1; }
-            if(a.nombre > b.nombre) { return 1; }
-            return 0;
-        })
+        if(nextMonthDay.getTime() >= e[0].getTime()){
+            setError('')
 
-        setListaClasesParcial(listaClasesParcialesLocal)
-        if(listaClasesParcialesLocal.length > 0) {
-            setClaseActual(listaClasesParcialesLocal[0])
-            setCargado(true)
-        }
-        else {
+            const listaClasesParcialesLocal = []
+            for(var i = 0; i < salaActual.clases.length; i++){
+                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === e[0].getTime()) listaClasesParcialesLocal.push(salaActual.clases[i])
+            }
+
+            listaClasesParcialesLocal.sort(function(a,b){
+                if(a.nombre < b.nombre) { return -1; }
+                if(a.nombre > b.nombre) { return 1; }
+                return 0;
+            })
+
+            setListaClasesParcial(listaClasesParcialesLocal)
+            if(listaClasesParcialesLocal.length > 0) {
+                setClaseActual(listaClasesParcialesLocal[0])
+                setCargado(true)
+            }
+            else {
+                setClaseActual({nombre:''})
+                setCargado(false)
+            }
+        }else{
+            setError('Aún no se han revelado las clases de la fecha seleccionada. Las clases se liberan 30 días antes de la fecha seleccionada.')
+            setListaClasesParcial([])
             setClaseActual({nombre:''})
             setCargado(false)
         }

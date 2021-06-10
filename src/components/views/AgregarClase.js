@@ -89,7 +89,7 @@ function AgregarClase() {
                             const usuariosTrabajadoresParcial = []
                             for(var i = 0; i < usuariosTrabajadores.length; i++){
                                 for(var j = 0; j < usuariosTrabajadores[i].herencia[0].length; j++){
-                                    if(usuariosTrabajadores[i].herencia[0][j]._id === respuesta.data[0].servicios[0]._id)usuariosTrabajadoresParcial.push(usuariosTrabajadores[i])
+                                    if(usuariosTrabajadores[i].herencia[0][j]._id === respuesta.data[0].servicios[0]._id && usuariosTrabajadores[i].estado)usuariosTrabajadoresParcial.push(usuariosTrabajadores[i])
                                 }
                             }
                             setListaTrabajadoresParcial(usuariosTrabajadoresParcial)
@@ -158,7 +158,7 @@ function AgregarClase() {
                     const usuariosTrabajadoresParcial = []
                     for(var k = 0; k < listaTrabajadores.length; k++){
                         for(var j = 0; j < listaTrabajadores[k].herencia[0].length; j++){
-                            if(listaTrabajadores[k].herencia[0][j]._id === listaSalas[i].servicios[0]._id)usuariosTrabajadoresParcial.push(listaTrabajadores[k])
+                            if(listaTrabajadores[k].herencia[0][j]._id === listaSalas[i].servicios[0]._id && listaTrabajadores[k].estado)usuariosTrabajadoresParcial.push(listaTrabajadores[k])
                         }
                     }
                     setListaTrabajadoresParcial(usuariosTrabajadoresParcial)
@@ -210,7 +210,7 @@ function AgregarClase() {
                 const usuariosTrabajadoresParcial = []
                 for(var k = 0; k < listaTrabajadores.length; k++){
                     for(var j = 0; j < listaTrabajadores[k].herencia[0].length; j++){
-                        if(listaTrabajadores[k].herencia[0][j]._id === listaServiciosParcial[i]._id)usuariosTrabajadoresParcial.push(listaTrabajadores[k])
+                        if(listaTrabajadores[k].herencia[0][j]._id === listaServiciosParcial[i]._id && listaTrabajadores[k].estado)usuariosTrabajadoresParcial.push(listaTrabajadores[k])
                     }
                 }
                 setListaTrabajadoresParcial(usuariosTrabajadoresParcial)

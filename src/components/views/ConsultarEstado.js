@@ -77,7 +77,7 @@ function ConsultarEstado() {
                         const usuariosClientes = []
 
                         for( var i = 0; i < respuestaListaUsuarios.data.length; i++){
-                            if(respuestaListaUsuarios.data[i].rol === 'Cliente') usuariosClientes.push(respuestaListaUsuarios.data[i])
+                            if(respuestaListaUsuarios.data[i].rol === 'Cliente' && respuestaListaUsuarios.data[i].estado) usuariosClientes.push(respuestaListaUsuarios.data[i])
                         }
 
                         setListaClientes(usuariosClientes)
