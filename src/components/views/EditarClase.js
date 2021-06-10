@@ -286,7 +286,7 @@ function EditarClase() {
             setError("Los cupos no pueden ser menores o iguales a 0")
         }else if(inicioClase >= finClase){
             setError("Las horas de inicio y cierre no pueden ser las mismas ni puede finalizar antes de empezar")
-        }else if(dia[0].getTime() <= mesDePublicado.getTime()){
+        }else if(dia[0].getTime() <= mesDePublicado.getTime() && dia[0].getTime() !== new Date(claseActual.diaEjecucion).getTime()){
             setError("Las clases deben de hacerse con al menos un mes de antelación para no interferir con las clases publicadas")
         }else{
             const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']

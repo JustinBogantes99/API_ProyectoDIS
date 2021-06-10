@@ -94,7 +94,7 @@ function ConsultarEstado() {
                         for(var i = 0; i < usuariosDeSala.length; i++){
                             var moroso = false
                             for(var j = 0; j < usuariosDeSala[i].herencia[1].length; j++){
-                                if(usuariosDeSala[i].herencia[1][j].estado === 'Pendiente'){
+                                if(usuariosDeSala[i].herencia[1][j].estado === 'Moroso'){
                                     moroso = true
                                 }
                             }
@@ -127,7 +127,7 @@ function ConsultarEstado() {
                 for(var i = 0; i < usuariosDeSala.length; i++){
                     var moroso = false
                     for(var j = 0; j < usuariosDeSala[i].herencia[1].length; j++){
-                        if(usuariosDeSala[i].herencia[1][j].estado === 'Pendiente'){
+                        if(usuariosDeSala[i].herencia[1][j].estado === 'Moroso'){
                             moroso = true
                         }
                     }
