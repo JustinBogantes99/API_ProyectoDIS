@@ -150,7 +150,7 @@ function CambiarContrasenia() {
 
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0px 100px'}}>
                         <Button buttonStyle='btn--outline2' path='/miPerfil' specificStyle={{width: '260px'}}>Volver a Mi Perfil</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Button buttonStyle='btn--outline2' onClick={handleSubmit} specificStyle={{width: '260px'}}>Agregar Servicio</Button>
+                        <Button buttonStyle='btn--outline2' onClick={handleSubmit} specificStyle={{width: '260px'}}>Aceptar cambio</Button>
                 </div>
             </div>
             
