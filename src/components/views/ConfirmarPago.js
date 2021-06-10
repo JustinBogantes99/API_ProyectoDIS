@@ -167,7 +167,7 @@ function ConfirmarPago() {
                             if(listaClientes[j].cuenta.nombreUsuario === listaClasesParcial[k].pagos[i].clienteNombreUsuario && listaClasesParcial[k].pagos[i].estado === 'Moroso'){
                                 usuariosPago.push(listaClientes[j])
                                 if(first){
-                                    setPagoActual(listaClasesParcial[k].pagos[j].monto)
+                                    setPagoActual(listaClasesParcial[k].pagos[i].monto)
                                     first = false
                                 }
                             }
