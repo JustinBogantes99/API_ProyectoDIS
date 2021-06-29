@@ -5,6 +5,7 @@ import { Clase } from '../Model/Clase';
 import { Instructor } from '../Model/Instructor';
 import { Sala } from '../Model/Sala';
 import { VisitorMisClases } from '../Visitor/VisitorMisClases';
+import axios from 'axios';
 
 function CancelarPeticion() {
     const controller = new Controller()
