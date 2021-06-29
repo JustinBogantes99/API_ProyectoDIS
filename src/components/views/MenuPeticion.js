@@ -8,12 +8,11 @@ function getLocalSession() {
     return userData
 }
 
-
-function MenuClases() {
+function MenuPeticiones() {
     const [role, setRole] = useState(() => {
         let userData = getLocalSession();
         if(!userData) window.location.replace('/login')
-        if(userData.role === 'Administrador'){
+        if(userData.role === 'Instructor'){
             return userData.role
         }else{
             window.location.replace('/menuPrincipal')
@@ -24,17 +23,14 @@ function MenuClases() {
         <div style={{margin: '0px 0px 20px'}}>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
                 <h1 style={{color:'#5A47AB'}}>
-                    Menú de Clases
+                    Menú de Peticiones
                 </h1>
             </div>
             <div className="container">
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '100px 0px 100px'}}>
-                    <Button buttonStyle='btn--outline2' path='/agregarClase' specificStyle={{width: '200px'}}>Agregar Clase</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button buttonStyle='btn--outline2' path='/editarClase' specificStyle={{width: '200px'}}>Editar Clase</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button buttonStyle='btn--outline2' path='/eliminarClase' specificStyle={{width: '200px'}}>Eliminar Clase</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button buttonStyle='btn--outline2' path='/cancelarAsistencia' specificStyle={{width: '200px'}}>Cancelar Asistencia</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button buttonStyle='btn--outline2' path='/confirmarPago' specificStyle={{width: '200px'}}>Confirmar Pago</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button buttonStyle='btn--outline2' path='/gestionarPeticiones' specificStyle={{width: '200px'}}>Gestionar Peticiones</Button>                
+                    <Button buttonStyle='btn--outline2' path='/agregarPeticion' specificStyle={{width: '230px'}}>Agregar Petición</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button buttonStyle='btn--outline2' path='/editarPeticion' specificStyle={{width: '230px'}}>Editar Petición</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button buttonStyle='btn--outline2' path='/eliminarPeticion' specificStyle={{width: '230px'}}>Cancelar Petición</Button>
                 </div>
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '100px 0px 100px'}}>
                     <Button buttonStyle='btn--outline2' path='/menuPrincipal' specificStyle={{width: '230px'}}>Volver al Menú Principal</Button>             
@@ -44,4 +40,4 @@ function MenuClases() {
     )
 }
 
-export default MenuClases
+export default MenuPeticiones

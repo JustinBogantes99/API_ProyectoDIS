@@ -58,6 +58,7 @@ function CambiarContrasenia() {
                                     cuenta: {nombreUsuario:usuario.data[0].cuenta.nombreUsuario, contrasenia:respuestaContraseniaSalteada.data},
                                     sala: usuario.data[0].sala,
                                     estado: usuario.data[0].estado,
+                                    notificaciones: usuario.data[0].notificaciones,
                                     herencia: usuario.data[0].herencia,
                                 }
                                 axios.post('https://api-dis2021.herokuapp.com/Usuario/editarUsuario', editandoUsuario)

@@ -119,7 +119,8 @@ function EditarClase() {
             const clasesParciales = []
 
             for(var i = 0; i < salaActual.clases.length; i++){
-                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === diaSeleccionado.getTime()){
+                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === diaSeleccionado.getTime() &&
+                salaActual.clases[i].estado === 'Autorizado'){
                     clasesParciales.push(salaActual.clases[i])
                 }
             }
@@ -318,7 +319,8 @@ function EditarClase() {
                         servicio:servicioActual,
                         horaInicio:inicioClase,
                         horaFin: finClase,
-                        precio:precio
+                        precio:precio,
+                        estado: 'Autorizado'
                     }
 
                     const listaNuevasClases = []

@@ -98,7 +98,8 @@ function ConsultarClasesCliente() {
                 console.log(dateRange)
                 for(var i = 0; i < salaActualLocal.clases.length; i++){
                     if(new Date(salaActualLocal.clases[i].diaEjecucion).getTime() <= dateRange[1].getTime() &&
-                       new Date(salaActualLocal.clases[i].diaEjecucion).getTime() >= dateRange[0].getTime())listaClasesParcialLocal.push(salaActualLocal.clases[i])
+                       new Date(salaActualLocal.clases[i].diaEjecucion).getTime() >= dateRange[0].getTime() &&
+                       salaActualLocal.clases[i].estado === 'Autorizado')listaClasesParcialLocal.push(salaActualLocal.clases[i])
                 }
 
                 console.log(listaClasesParcialLocal)
@@ -141,7 +142,8 @@ function ConsultarClasesCliente() {
             for(var i = 0; i < salaActual.clases.length; i++){
                 if((new Date(salaActual.clases[i].diaEjecucion).getTime() <= fechasAsignadas[1].getTime() &&
                     new Date(salaActual.clases[i].diaEjecucion).getTime() >= fechasAsignadas[0].getTime()) && 
-                    new Date(salaActual.clases[i].diaEjecucion).getTime() <= nextMonthDay.getTime())listaClasesParcialLocal.push(salaActual.clases[i])
+                    new Date(salaActual.clases[i].diaEjecucion).getTime() <= nextMonthDay.getTime() &&
+                    salaActual.clases[i].estado === 'Autorizado')listaClasesParcialLocal.push(salaActual.clases[i])
             }
 
             setListaClasesParcial(listaClasesParcialLocal)

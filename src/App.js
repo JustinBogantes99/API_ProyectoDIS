@@ -33,6 +33,12 @@ import EditarClase from './components/views/EditarClase'
 import ConfirmarPago from './components/views/ConfirmarPago'
 import MiPerfil from './components/views/MiPerfil'
 
+import MenuPeticion from './components/views/MenuPeticion'
+import AgregarPeticion from './components/views/AgregarPeticion'
+import EditarPeticion from './components/views/EditarPeticion';
+import CancelarPeticion from './components/views/CancelarPeticion';
+import GestionarPeticiones from './components/views/GestionarPeticiones';
+
 
 function App() {
   return (
@@ -67,6 +73,12 @@ function App() {
           <Route exact path="/editarClase" component={EditarClase} />
           <Route exact path="/confirmarPago" component={ConfirmarPago} />
           <Route exact path="/miPerfil" component={MiPerfil} />
+
+          <Route exact path="/menuPeticion" component={MenuPeticion} />
+          <Route exact path="/agregarPeticion" component={AgregarPeticion} />
+          <Route exact path="/editarPeticion" component={EditarPeticion} />
+          <Route exact path="/eliminarPeticion" component={CancelarPeticion} />
+          <Route exact path="/gestionarPeticiones" component={GestionarPeticiones} />
         </Switch>
     </Router>
   );

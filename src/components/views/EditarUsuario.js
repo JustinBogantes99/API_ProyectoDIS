@@ -512,6 +512,7 @@ function EditarUsuario() {
                     rol:rol,
                     cuenta:{nombreUsuario:usuarioActual.cuenta.nombreUsuario, contrasenia:usuarioActual.cuenta.contrasenia},
                     sala:{idSala:salaPertenece.idSala, nombreSala:salaPertenece.nombreSala},
+                    notificaciones: usuarioActual.notificaciones,
                     herencia:usuarioActual.herencia
                 }
             }

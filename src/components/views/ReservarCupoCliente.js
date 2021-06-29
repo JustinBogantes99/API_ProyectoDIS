@@ -41,7 +41,8 @@ function ReservarCupoCliente() {
                 setSalaActual(salaActualLocal)
                 const listaClasesParcialLocal = []
                 for(var i = 0; i < salaActualLocal.clases.length; i++){
-                    if(new Date(salaActualLocal.clases[i].diaEjecucion).getTime() === dia[0].getTime())listaClasesParcialLocal.push(salaActualLocal.clases[i])
+                    if(new Date(salaActualLocal.clases[i].diaEjecucion).getTime() === dia[0].getTime() && 
+                    salaActualLocal.clases[i].estado === 'Autorizado')listaClasesParcialLocal.push(salaActualLocal.clases[i])
                 }
 
                 console.log(listaClasesParcialLocal)
@@ -75,7 +76,8 @@ function ReservarCupoCliente() {
                 const listaClasesParcialLocal = []
     
                 for(var i = 0; i < salaActual.clases.length; i++){
-                    if(new Date(salaActual.clases[i].diaEjecucion).getTime() === dia[0].getTime())listaClasesParcialLocal.push(salaActual.clases[i])
+                    if(new Date(salaActual.clases[i].diaEjecucion).getTime() === dia[0].getTime() && 
+                    salaActual.clases[i].estado === 'Autorizado')listaClasesParcialLocal.push(salaActual.clases[i])
                 }
     
                 setListaClasesParcial(listaClasesParcialLocal)

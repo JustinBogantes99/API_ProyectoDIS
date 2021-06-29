@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../Button';
 import Calendar from "react-range-calendar";
 import axios from 'axios';
+import {StrategyManager} from '../Strategy/Stategy'
 
 function getLocalSession() {
     let userData = localStorage.getItem('token');
@@ -247,9 +248,9 @@ function AgregarClase() {
             setError("Los cupos no pueden ser menores o iguales a 0")
         }else if(inicioClase >= finClase){
             setError("Las horas de inicio y cierre no pueden ser las mismas ni puede finalizar antes de empezar")
-        }else if(dia[0].getTime() <= mesDePublicado.getTime()){
+        }/*else if(dia[0].getTime() <= mesDePublicado.getTime()){
             setError("Las clases deben de hacerse con al menos un mes de antelación para no interferir con las clases publicadas")
-        }else{
+        }*/else{
             const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
             const diaActual = diasSemana[dia[0].getDay()]
             var horarioDia = null
@@ -278,7 +279,8 @@ function AgregarClase() {
                         servicio:servicioActual,
                         horaInicio:inicioClase,
                         horaFin: finClase,
-                        precio:precio
+                        precio:precio,
+                        estado: 'Autorizado'
                     }
 
                     const listaNuevasClases = []
@@ -323,7 +325,8 @@ function AgregarClase() {
                                 servicio:servicioActual,
                                 horaInicio:inicioClase,
                                 horaFin: finClase,
-                                precio:precio
+                                precio:precio,
+                                estado: 'Autorizado'
                             }
                             listaNuevasClases.push(nuevaClaseInter)
                             diaNumero = diaNumero+7
@@ -333,7 +336,8 @@ function AgregarClase() {
                     
                     for(var i = 0; i < salaActual.clases.length && !conflictoHorario; i++){
                         for(var j = 0; j < listaNuevasClases.length && !conflictoHorario; j++){
-                            if(listaNuevasClases[j].diaEjecucion.getTime() === new Date(salaActual.clases[i].diaEjecucion).getTime()){
+                            if(listaNuevasClases[j].diaEjecucion.getTime() === new Date(salaActual.clases[i].diaEjecucion).getTime() &&
+                            salaActual.clases[i].estado === 'Autorizado'){
                                 if((listaNuevasClases[j].horaInicio < salaActual.clases[i].horaInicio && listaNuevasClases[j].horaFin <= salaActual.clases[i].horaInicio)
                                 ||  listaNuevasClases[j].horaInicio >= salaActual.clases[i].horaFin && listaNuevasClases[j].horaFin > salaActual.clases[i].horaFin){
 
@@ -346,16 +350,29 @@ function AgregarClase() {
                     }
 
                     if(!conflictoHorario){
-                        const nuevasClasesFinal = {
-                            nombreSala: salaActual.nombre,
-                            nuevasClases: listaNuevasClases
-                        }
+                        var strategyAdmin = new StrategyManager("Administrador")
 
-                        axios.post('https://api-dis2021.herokuapp.com/Sala/agregarClases', nuevasClasesFinal)
+                        strategyAdmin.setClase(listaNuevasClases)
+                        strategyAdmin.setNombreSala(salaActual.nombre)
+                        strategyAdmin.execute()
+
+                        strategyAdmin.sleep(500)
                         .then(() => {
                             alert('¡Clases Agregadas!')
                             window.location.replace('/menuClases')
                         })
+                        
+                        /*
+                        const nuevasClasesFinal = {
+                            nombreSala: salaActual.nombre,
+                            nuevasClases: listaNuevasClases
+                        }
+                        
+                        axios.post('https://api-dis2021.herokuapp.com/Sala/agregarClases', nuevasClasesFinal)
+                        .then(() => {
+                            alert('¡Clases Agregadas!')
+                            window.location.replace('/menuClases')
+                        }) */
                     }else{
                         setError(`Exite un conflicto con una clase: ${claseConflicto.nombre}, Hora de Inicio: ${claseConflicto.horaInicio}, Hora de Finalización: ${claseConflicto.horaFin}`)
                     }

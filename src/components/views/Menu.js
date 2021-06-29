@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../Button';
+import { Controller } from '../Controller/Controller';
 
 function getLocalSession() {
     let userData = localStorage.getItem('token');
@@ -8,6 +9,8 @@ function getLocalSession() {
 }
 
 function Menu() {
+    const controller = new Controller()
+
     const [role, setRole] = useState(() => {
         let userData = getLocalSession();
         if(userData){
@@ -17,8 +20,48 @@ function Menu() {
         }
     })
 
+    const [usuario, setUsuario] = useState()
+    const [notificaciones, setNotificaciones] = useState([])
+
+    const [charger, setCharger] = useState(() => {
+        var userData = controller.getLocalSession()
+
+        controller.getUsuarioRaw(controller.getUsernameLocalSession(userData))
+        .then(usuario => {
+            if(usuario.notificaciones.length > 0){
+                setNotificaciones(usuario.notificaciones)
+                setUsuario(usuario)
+            }
+        })
+    })
+
     return (
         <div style={{margin: '0px 0px 20px'}}>
+            {
+            notificaciones.length > 0?(
+            <>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
+                <h1 style={{color:'#5A47AB'}}>
+                    Tiene {notificaciones.length > 1?(notificaciones.length+' notificaciones nuevas'):(notificaciones.length+' notificación nueva')}
+                </h1>
+            </div>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
+                <h2>
+                    {notificaciones[notificaciones.length-1]}
+                </h2>
+            </div>
+            <div className="container">
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '100px 0px 100px'}}>
+                    <Button buttonStyle='btn--outline2' onClick={() => {
+                        notificaciones.pop()
+                        if(notificaciones.length === 0) controller.deletenotificaciones(usuario)
+                    }} specificStyle={{width: '200px'}}>Aceptar</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button buttonStyle='btn--outline2' onClick={() => setNotificaciones([])} specificStyle={{width: '200px'}}>Aceptar todos</Button>
+                </div>
+            </div>  
+            </>
+            ):(
+            <>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
                 <h1 style={{color:'#5A47AB'}}>
                     Menú Principal
@@ -38,9 +81,10 @@ function Menu() {
                         ):(<></>)                  
                     }
                     {
-                        (role==='Instructor' || role==='Instructo rTemporal')?(
+                        (role==='Instructor' || role==='Instructor Temporal')?(
                             <>
-                            <Button buttonStyle='btn--outline2' path='/verMisClases' specificStyle={{width: '200px'}}>Consultar mis Clases</Button>
+                            <Button buttonStyle='btn--outline2' path='/verMisClases' specificStyle={{width: '200px'}}>Consultar mis Clases</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                            {role==='Instructor'?(<Button buttonStyle='btn--outline2' path='/menuPeticion' specificStyle={{width: '200px'}}>Menú Peticiones</Button>):(<></>)}
                             </>
                         ):(<></>)
                     }
@@ -55,6 +99,9 @@ function Menu() {
                     
                 </div>
             </div>
+            </>
+            )
+            }
         </div>
     )
 }

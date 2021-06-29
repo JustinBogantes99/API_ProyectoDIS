@@ -64,7 +64,8 @@ function EliminarClase() {
             const clasesParciales = []
 
             for(var i = 0; i < salaActual.clases.length; i++){
-                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === diaSeleccionado.getTime()){
+                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === diaSeleccionado.getTime() &&
+                salaActual.clases[i].estado === 'Autorizado'){
                     clasesParciales.push(salaActual.clases[i])
                 }
             }
@@ -98,8 +99,12 @@ function EliminarClase() {
 
         if(listaSalas.length === 0 || !diaOriginal || listaClasesParcial.length === 0){
             setError('No se puede eliminar clases que no existen')
-        }else if(diaOriginalLocal.getTime() <= mesDePublicado.getTime()){
+        }/*else if(diaOriginalLocal.getTime() <= mesDePublicado.getTime()){
             setError("Las clases publicadas no pueden eliminarse")
+        }*/else if(diaOriginalLocal.getTime() <= new Date().getTime()){
+            setError("Las clases que ya han sucedido no pueden eliminarse")
+        }else if(claseActual.pagos.length > 0){
+            setError("No se puede eliminar la clase porque ya tiene clientes con reservas")
         }else{
             setError('')
             const eliminandoClase = {

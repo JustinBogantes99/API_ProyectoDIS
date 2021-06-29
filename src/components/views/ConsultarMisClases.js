@@ -68,7 +68,8 @@ function ConsultarMisClases() {
                 setSalaActual(salaActualLocal)
                 const listaClasesParcialLocal = []
                 for(var i = 0; i < salaActualLocal.clases.length; i++){
-                    if(new Date(salaActualLocal.clases[i].diaEjecucion).getTime() === dia[0].getTime() && salaActualLocal.clases[i].instructor.cuenta.nombreUsuario === userData.username)listaClasesParcialLocal.push(salaActualLocal.clases[i])
+                    if(new Date(salaActualLocal.clases[i].diaEjecucion).getTime() === dia[0].getTime() && salaActualLocal.clases[i].instructor.cuenta.nombreUsuario === userData.username &&
+                    salaActualLocal.clases[i].estado === 'Autorizado')listaClasesParcialLocal.push(salaActualLocal.clases[i])
                 }
 
                 console.log(listaClasesParcialLocal)
@@ -106,7 +107,8 @@ function ConsultarMisClases() {
             const clasesParciales = []
 
             for(var i = 0; i < salaActual.clases.length; i++){
-                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === diaSeleccionado.getTime() && salaActual.clases[i].instructor.cuenta.nombreUsuario === clienteActual.cuenta.nombreUsuario){
+                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === diaSeleccionado.getTime() && salaActual.clases[i].instructor.cuenta.nombreUsuario === clienteActual.cuenta.nombreUsuario &&
+                salaActual.clases[i].estado === 'Autorizado'){
                     clasesParciales.push(salaActual.clases[i])
                 }
             }

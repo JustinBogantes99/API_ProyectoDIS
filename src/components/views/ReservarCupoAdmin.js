@@ -74,7 +74,8 @@ function ReservarCupoAdmin() {
                         const clasesParcialesLocal = []
 
                         for(var i = 0; i < respuesta.data[0].clases.length; i++){
-                            if(new Date(respuesta.data[0].clases[i].diaEjecucion).getTime() === dia[0].getTime())clasesParcialesLocal.push(respuesta.data[0].clases[i])
+                            if(new Date(respuesta.data[0].clases[i].diaEjecucion).getTime() === dia[0].getTime() &&
+                            respuesta.data[0].clases[i].estado === 'Autorizado')clasesParcialesLocal.push(respuesta.data[0].clases[i])
                         }
 
                         setListaClasesParcial(clasesParcialesLocal)
@@ -110,7 +111,8 @@ function ReservarCupoAdmin() {
 
                 const listaClasesParcialesLocal = []
                 for(var k = 0; k < listaSalas[i].clases.length; k++){
-                    if(new Date(listaSalas[i].clases[k].diaEjecucion).getTime() === dia[0].getTime())listaClasesParcialesLocal.push(listaSalas[i].clases[k])
+                    if(new Date(listaSalas[i].clases[k].diaEjecucion).getTime() === dia[0].getTime() &&
+                    listaSalas[i].clases[k].estado === 'Autorizado')listaClasesParcialesLocal.push(listaSalas[i].clases[k])
                 }
 
                 listaClasesParcialesLocal.sort(function(a,b){
@@ -158,7 +160,8 @@ function ReservarCupoAdmin() {
 
             const listaClasesParcialesLocal = []
             for(var i = 0; i < salaActual.clases.length; i++){
-                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === e[0].getTime()) listaClasesParcialesLocal.push(salaActual.clases[i])
+                if(new Date(salaActual.clases[i].diaEjecucion).getTime() === e[0].getTime() &&
+                salaActual.clases[i].estado === 'Autorizado') listaClasesParcialesLocal.push(salaActual.clases[i])
             }
 
             listaClasesParcialesLocal.sort(function(a,b){
