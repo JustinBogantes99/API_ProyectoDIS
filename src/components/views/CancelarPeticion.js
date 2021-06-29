@@ -83,7 +83,7 @@ function CancelarPeticion() {
 
         if(!diaOriginal || listaClases.length === 0){
             setError('No se puede eliminar clases que no existen')
-        }else if(claseActual.getPagos() > 0){ //Agregar check de estado, si está en standby se puede eliminar aunque esté en fecha
+        }else if(claseActual.getPagos().length > 0){ //Agregar check de estado, si está en standby se puede eliminar aunque esté en fecha
             setError("Las clases publicadas no cancelarse si tienen al menos una persona en reserva")
         }else{
             setError('')
