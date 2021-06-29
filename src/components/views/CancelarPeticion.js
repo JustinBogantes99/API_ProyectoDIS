@@ -12,6 +12,7 @@ function CancelarPeticion() {
     const [salaActual, setSalaActual] = useState(new Sala())
     const [instructorActual, setInstructorActual] = useState(new Instructor())
     const visitorMisClases = new VisitorMisClases(new Date())
+    const [accionRealizada, setAccionRealizada] = useState(false)
 
     const [diaOriginal, setDiaOriginal] = useState('')
     const [listaClases, setListaClases] = useState([])
@@ -81,9 +82,9 @@ function CancelarPeticion() {
 
         if(!diaOriginal || listaClases.length === 0){
             setError('No se puede eliminar clases que no existen')
-        }/*else if(diaOriginalLocal.getTime() <= mesDePublicado.getTime()){ //Agregar check de estado, si está en standby se puede eliminar aunque esté en fecha
-            setError("Las clases publicadas no pueden eliminarse")
-        }*/else{
+        }else if(claseActual.getPagos() > 0){ //Agregar check de estado, si está en standby se puede eliminar aunque esté en fecha
+            setError("Las clases publicadas no cancelarse si tienen al menos una persona en reserva")
+        }else{
             setError('')
 
             //ESTA PARTE SE TIENE QUE MANDAR AL CONTROLLER
@@ -92,61 +93,81 @@ function CancelarPeticion() {
                 _id: controller.getIdClase(claseActual)
             }
             console.log(eliminandoClase)
-            /*axios.post('https://api-dis2021.herokuapp.com/Sala/eliminarClase', eliminandoClase)
+            axios.post('https://api-dis2021.herokuapp.com/Sala/eliminarClase', eliminandoClase)
             .then(() => {
                 alert('Clase eliminada!')
                 window.location.replace('/menuClases')
-            })*/
+            })
+            setAccionRealizada(true)
         }
     }
 
     return (
         <div style={{margin: '0px 0px 20px'}}>
+        {
+        !accionRealizada?(
+            <>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
+            <h1 style={{color:'#5A47AB'}}>
+                Cancelar Petición
+            </h1>
+        </div>
+
+        <div className="container">
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <div className="form-group" style={{margin: '10px 10px 20px'}}>
+                    <h2 style={{color:'#5A47AB', margin: '10px 0 0px'}}>
+                        Día de la Clase
+                    </h2>
+                    <input type="date" placeholder='Día de la Clase' name="diaClase" required
+                    className="form-control" 
+                    value={diaOriginal}
+                    onChange={e => handleCambioDia(e.target.value)}
+                    style={{width:"400px"}}>
+                    </input>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div className="form-group" style={{margin: '10px 10px 20px'}}>
+                    <h2 style={{color:'#5A47AB', margin: '10px 0 0px'}}>
+                        Clase
+                    </h2>
+                    <select
+                    required
+                    className="form-control"
+                    value={claseActual.getNombre()}
+
+                    style={{width:"300px"}}>
+                        {
+                            listaClases.map(e => controller.MakeOptions(controller.getNombreClase(e)))
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '30px 0 20px'}}>
+                <label>{error}</label>
+            </div>
+
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0px 100px'}}>
+                    <Button buttonStyle='btn--outline2' path='/menuPeticion' specificStyle={{width: '260px'}}>Volver al Menú de Clases</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button buttonStyle='btn--outline2' onClick={handleSubmit} specificStyle={{width: '260px'}}>Eliminar Clase</Button>
+            </div>
+        </div>
+        </>
+        ):(
+            <>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
                 <h1 style={{color:'#5A47AB'}}>
-                    Cancelar Petición
+                    ¡Cancelación Realizada Exitosamente!
                 </h1>
             </div>
-
             <div className="container">
-                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <div className="form-group" style={{margin: '10px 10px 20px'}}>
-                        <h2 style={{color:'#5A47AB', margin: '10px 0 0px'}}>
-                            Día de la Clase
-                        </h2>
-                        <input type="date" placeholder='Día de la Clase' name="diaClase" required
-                        className="form-control" 
-                        value={diaOriginal}
-                        onChange={e => handleCambioDia(e.target.value)}
-                        style={{width:"400px"}}>
-                        </input>
-                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <div className="form-group" style={{margin: '10px 10px 20px'}}>
-                        <h2 style={{color:'#5A47AB', margin: '10px 0 0px'}}>
-                            Clase
-                        </h2>
-                        <select
-                        required
-                        className="form-control"
-                        value={claseActual.getNombre()}
-
-                        style={{width:"300px"}}>
-                            {
-                                listaClases.map(e => controller.MakeOptions(controller.getNombreClase(e)))
-                            }
-                        </select>
-                    </div>
-                </div>
-
-                <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '30px 0 20px'}}>
-                    <label>{error}</label>
-                </div>
-
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0px 100px'}}>
-                        <Button buttonStyle='btn--outline2' path='/menuPeticion' specificStyle={{width: '260px'}}>Volver al Menú de Clases</Button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Button buttonStyle='btn--outline2' onClick={handleSubmit} specificStyle={{width: '260px'}}>Eliminar Clase</Button>
+                    <Button buttonStyle='btn--outline2' path='/menuPeticion' specificStyle={{width: '265px'}}>Volver al Menú de Peticiones</Button>
                 </div>
             </div>
+            </>
+            )
+        }
         </div>
     )
 }

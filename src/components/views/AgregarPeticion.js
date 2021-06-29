@@ -18,6 +18,7 @@ function AgregarPeticion() {
     const [newClase, setNewClase] = useState(new Clase())
     const visitorSala = new VisitorClases(new Date())
     const [listaClases, setListaClases] = useState([])
+    const [accionRealizada, setAccionRealizada] = useState(false)
 
     const [salaActual, setSalaActual] = useState({nombre:''})
     const [listaServiciosParcial, setListaServiciosParcial] = useState([])
@@ -257,6 +258,7 @@ function AgregarPeticion() {
                     window.location.replace('/menuPeticion')
                 })
 
+                setAccionRealizada(true)
                 /* axios.post('https://api-dis2021.herokuapp.com/Sala/agregarClases', nuevasClasesFinal)
                 .then(() => {
                     // Se obtiene la lista de administradores relacionados a la clase a la cual se le está haciendo la petición
@@ -285,6 +287,9 @@ function AgregarPeticion() {
 
     return (
         <div style={{margin: '0px 0px 20px'}}>
+        {
+            !accionRealizada?(
+            <>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
                 <h1 style={{color:'#5A47AB'}}>
                     Agregar Petición
@@ -424,6 +429,23 @@ function AgregarPeticion() {
                         <Button buttonStyle='btn--outline2' onClick={handleSubmit} specificStyle={{width: '265px'}}>Agregar Petición</Button>
                 </div>
             </div>
+            </>):(
+            <>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0 45px'}}>
+                <h1 style={{color:'#5A47AB'}}>
+                    ¡Agregar Realizada Exitosamente!
+                </h1>
+            </div>
+            <div className="container">
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", margin: '50px 0px 100px'}}>
+                    <Button buttonStyle='btn--outline2' path='/menuPeticion' specificStyle={{width: '265px'}}>Volver al Menú de Peticiones</Button>
+                </div>
+            </div>
+            
+            </>
+            )
+        }
+            
         </div>
     )
 }
